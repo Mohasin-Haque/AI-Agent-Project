@@ -29,7 +29,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5173", "https://ai-agent-project-1-kq4v.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -58,7 +58,7 @@ for issue in issues:
 embeddings = []
 for text in texts:
     embedding = client.embeddings.create(
-        model="text-embedding-ada-002",
+        model="openai/text-embedding-3-small",
         input=text
     ).data[0].embedding
     embeddings.append(embedding)
@@ -84,7 +84,7 @@ class EscalationRequest(BaseModel):
 @app.post("/query")
 def query_issue(req: QueryRequest):
     query_embedding = client.embeddings.create(
-        model="text-embedding-ada-002",
+        model="openai/text-embedding-3-small",
         input=req.user_query
     ).data[0].embedding
 
