@@ -6,7 +6,7 @@ export async function queryIssue(userQuery) {
   //   body: JSON.stringify({ user_query: userQuery })
   // });
   //prod
-  const res = await fetch("https://ai-agent-project-he7a.onrender.com", {
+  const res = await fetch("https://ai-agent-project-he7a.onrender.com/query", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ user_query: userQuery })
