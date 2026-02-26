@@ -1,18 +1,207 @@
-# React + Vite
+# Effortech Smart Portal  
+### Developed by Mohasin Haque
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## 🚀 Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Effortech Smart Portal is an AI-powered issue resolution system designed to:
 
-## React Compiler
+- Identify banking / Finacle-related issues
+- Provide root cause analysis
+- Display structured resolution steps
+- Show step-wise reference images
+- Display reference queries (read-only)
+- Allow users to mark issue as resolved
+- Escalate issue to CBS support team with ticket generation
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Frontend is built using **React (Vite)** and connected to a **FastAPI backend** deployed on Render.
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## 🌐 Live Deployment
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Frontend:**  
+https://ai-agent-project-1-kq4v.onrender.com  
+
+**Backend API:**  
+https://ai-agent-project-he7a.onrender.com  
+
+---
+
+## 🏗 Tech Stack
+
+### Frontend
+- React (Vite)
+- CSS
+- Fetch API
+
+### Backend
+- FastAPI
+- FAISS (Vector Search)
+- OpenRouter Embeddings
+- NumPy
+- Render (Deployment)
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+│
+├── components/
+│   ├── QueryForm.jsx
+│   ├── ResponseCard.jsx
+│
+├── api/
+│   └── api.js
+│
+├── styles/
+│   └── app.css
+│
+└── App.jsx
+```
+
+---
+
+## 🔍 Features
+
+### 1️⃣ Smart Issue Identification
+- Embedding-based similarity search
+- Matches user query with predefined bank issues
+
+### 2️⃣ Detailed Resolution View
+- Identified Issue
+- Root Cause
+- Step-by-step Resolution
+- Step Images
+- Reference Queries
+
+### 3️⃣ Escalation System
+- Generates CBS ticket ID
+- Accepts user comments
+- Displays escalation confirmation
+
+### 4️⃣ Clean UI
+- Structured layout
+- Logo branding
+- Responsive container
+- Visual action buttons
+
+---
+
+## 📡 API Endpoints
+
+### Query Endpoint
+
+**POST** `/query`
+
+Request:
+```json
+{
+  "user_query": "Finacle login issue"
+}
+```
+
+Response:
+```json
+{
+  "issue_id": "CBS-101",
+  "identified_issue": "1. Finacle Login Failure",
+  "root_cause": "...",
+  "resolution_steps": [],
+  "step_assets": {},
+  "reference_queries": {},
+  "escalation_required": false
+}
+```
+
+---
+
+### Escalation Endpoint
+
+**POST** `/escalate`
+
+Request:
+```json
+{
+  "issue_id": "CBS-101",
+  "user_comments": "Tried all steps"
+}
+```
+
+Response:
+```json
+{
+  "status": "ESCALATED",
+  "ticket_id": "CBS-54321",
+  "message": "Issue escalated to CBS support team"
+}
+```
+
+---
+
+## ⚙️ How It Works
+
+1. User enters issue description.
+2. Frontend calls `/query`.
+3. Backend:
+   - Generates embedding
+   - Searches FAISS index
+   - Returns best matched issue.
+4. User can:
+   - Mark issue as resolved
+   - Escalate to CBS support
+
+---
+
+## 🔐 Environment Variables (Backend)
+
+Set this in Render → Backend Service → Environment:
+
+```
+OPENAI_API_KEY=sk-or-xxxxxxxxxxxxxxxx
+```
+
+---
+
+## 🧠 Core Logic
+
+- Vector similarity search using FAISS
+- Embedding model: `openai/text-embedding-3-small`
+- Dynamic rendering of step images
+- Dynamic rendering of reference queries
+- Conditional UI states:
+  - Resolved
+  - Escalated
+  - Pending
+
+---
+
+## 🎯 Future Enhancements
+
+- ServiceNow Integration
+- Email notifications
+- Role-based authentication
+- Admin dashboard
+- Analytics tracking
+- Persistent database storage
+
+<h1 align=center> Project Admin ❤️ </h1>
+<p align="center">
+
+<table align="center">
+    <tbody>
+        <tr>
+            <td align="center">
+                <a href="https://github.com/Mohasin-Haque">
+                    <img alt="" src="https://avatars.githubusercontent.com/Mohasin-Haque" width="100px;"><br>
+                    <sub><b> Mohasin Haque </b></sub>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+⭐ If you found this project useful, consider giving it a star!
