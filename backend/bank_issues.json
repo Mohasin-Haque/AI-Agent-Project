@@ -236,6 +236,161 @@
         "Go to SSOAdmin and then Unlock the ID."
       ],
       "escalation": true 
+    },
+    {
+      "issue_id": "Gold Rate-014",
+      "system": "Finacle",
+      "category": "Finacle",
+      "status_codes": ["Finacle"],
+      "issue_title": "Gold Rate Update",
+      "symptoms": [
+        "It is daily process, we need to add gold rate using finacle"
+      ],
+      "root_cause": "This is the Daily procedure to add Gold rate through Finacle.",
+      "resolution_steps": [
+        "Login Finacle",
+        "Go to Core Server and use CGRM Menu Option",
+        "Select the Function Code Add",
+        "Enter the Daily Gold Rate and then submit and verify on the same with Other Finacle ID."
+      ],
+ 
+      "step_assets": {
+        "2": [
+          "/assets/Gold_Rate/Image.1.jpeg"
+        ],
+        "3": [
+          "/assets/Gold_Rate/Image.2.jpeg"
+        ],
+        "4": [
+          "/assets/Gold_Rate/Image3..png"
+        ]
+      },
+      "escalation": true
+    },
+      {
+      "issue_id": "HPAYOFF-013",
+      "system": "Finacle",
+      "category": "Finacle",
+      "status_codes": ["Finacle"],
+      "issue_title": "HPAYOFF Issue",
+      "symptoms": [
+             "HPAYOFF Issue, Need to check in ADT, CLTT, and GAM tables"
+      ],
+      "root_cause": "During IG Gold account closure, the Credit team may face pending entry or authorization errors. The process involves running HLAST PAY, then HPAYOFF to zero out the account, and finally using CAACLA to close the account.",
+      "resolution_steps": [
+        "Start with an example. First, check the CLR_BAL_AMT by running the following query",
+        "SELECT CLR_BAL_AMT,cif_id,GAM.* FROM TBAADM.GAM WHERE FORACID='104242511069';",
+        "The CLR_BAL_AMT should be zero.",
+        "Run the next query to check three specific fields",
+        "SELECT * FROM TBAADM.ADT WHERE acid in (select acid from tbaadm.gam where foracid='104242511069') and auth_'!';",
+        "The Table Name should be CLTT.",
+        "The ENTERER_ID should be FIVUSER.",
+        "The AUTH_ID should be null (!).",
+        "Note: If the ENTERER_ID is OS_XXX, then escalate the case to the CBS team.",
+        "Run another query to check the TRAN_ID -",
+        "SELECT tran_id,CLTT.* FROM TBAADM.CLTT WHERE acid in (select acid from tbaadm.gam where foracid='104242511069') and bank_id='01';",
+        "Note: If the TRAN_ID is null, then it indicates an API issue, and the system will show authorization pending.",
+        "Type CSUM (in finacle) in the search tab (Menu Shortcut) Open CSUM and select the module H-FE update for HPAYOFF.",
+        "Add the account number and reference number from ADT table.",
+        "Re-run the previous queries. You will observe that no entries will now appear in the ADT and CLTT tables.",
+        "Note: The issues raised in the Helpdesk will typically have subject lines such as CAACLA Issue, PAYOFF Error, or HAFI entry shown as pending but not visible in HLASPAY. Our responsibility is limited to handling authorization pending issues only. If the specified conditions are met, we need to follow the necessary steps outlined above to resolve the issue."  
+      ],
+ 
+      "step_assets": {
+        "3": [
+          "/assets/HPAYOFF/Image1.png"
+        ],
+        "5": [
+          "/assets/HPAYOFF/Image2.jpeg"
+        ],
+        "11": [
+          "/assets/HPAYOFF/Image.3.jpeg"
+        ],
+        "13": [
+          "/assets/HPAYOFF/Image.4.jpeg"
+        ],
+        "14": [
+          "/assets/HPAYOFF/Image.5.jpeg"
+        ]
+      },
+ 
+      "escalation": true
+    },
+     {
+      "issue_id": "Bush Chat-021",
+      "system": "AML",
+      "category": "Beyond Trust",
+      "status_codes": ["Beyond Trust"],
+      "issue_title": "Bush Chat services restart",
+      "symptoms": [
+        "It is a simple process to restart the Bush Chat service"
+      ],
+      "root_cause": "The purpose of this document is to provide a clear, step-by-step procedure for restarting the Bushchat service (bushchat-win-service-64) on the server with IP address 192.168.54.40. Need to follow below steps and restart the Bush Chat service as per need.",
+      "resolution_steps": [
+        "Login Beyond Trust Application",
+        "Connect to the server at IP: 192.168.54.40.",
+        "After logging in, navigate to Services.",
+        "Locate Bushchat Service -->> In the Services list, scroll down to find bushchat-win-service-64.",
+        "Right-click on bushchat-win-service-64 and select Stop.",
+        "Once the service has stopped, right-click again and select Start.",
+        "Ensure the Status column shows Running again.",
+        "Close the session when done."
+      ],
+ 
+      "step_assets": {
+ 
+        "2": [
+          "/assets/Bushchat_service/Bushchat3.png"
+        ],
+        "4": [
+          "/assets/Bushchat_service/Bushchat1.jpeg"
+        ],
+        "6": [
+          "/assets/Bushchat_service/Bushchat2.jpeg"
+        ]
+      },
+      "escalation": true
+    },
+     {
+      "issue_id": "ALERT Batch Jobs-022",
+      "system": "Finacle",
+      "category": "Finacle",
+      "status_codes": ["Finacle"],
+      "issue_title": "ALERT Batch Job",
+      "symptoms": [
+        "ALERT Batch Jobs will be execute Every day at 7 PM by Evening Shift"
+      ],
+      "root_cause": "The Batch Job Scheduler is a critical component used to automate and manage scheduled jobs in the core server system. This document outlines the process for setting up and verifying jobs like DEPMS and executing them while monitoring their status via SQL queries. ALERT Batch Jobs will execute Every day at 7 PM by Evening Shift",
+      "resolution_steps": [
+        "Login Finacle",
+        "Go to Core server and run HBJE Menu Option",
+        "After using HBJE Menu Option, we need to follow as per below screenshot.",
+        "Set ID - ALL, No. of Parallel Jobs - 5, Job Group - ALERT",
+        "After Filling these Details, click on Submit Buttom and monitor from Backend(SQL), Below screenshot for your reference",
+        "ALERT Batch having 5 Batch Jobs, Need to check from backend, All the Batch Jobs should be completed.",
+        "Here is a 5 Batch Jobs - DEPMS, KYCAL, SOMSG, FDAAL, TXNAL",
+        "If you want to check single batch at a time then use below Query as per screenshot"
+      ],
+ 
+      "step_assets": {
+ 
+        "3": [
+          "/assets/ALERT/ALERT.jpeg"
+        ],
+        "5": [
+          "/assets/ALERT/ALERT1.jpeg"
+        ],
+        "8": [
+          "/assets/ALERT/ALERT2.jpeg"
+        ]
+      },
+ 
+      "reference_queries": {
+        "Single_Batch_Query": "select count (job_status),job_id,job_status from tbaadm.bjm where job_id in ('DEPMS') and run_for_date='02-03-2026' group by job_id,job_status;",
+           "ALL_ALERT_Batch_Query": "select count (job_status),job_id,job_status from tbaadm.bjm where job_id in ('SOMSG','DEPMS','FDAAL','TXNAL','KYCAL') and run_for_date='02-03-2026' group by job_id,job_status;"
+      },
+     
+      "escalation": true
     }
     
 ]
