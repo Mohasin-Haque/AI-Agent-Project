@@ -391,6 +391,111 @@
       },
      
       "escalation": true
+    },
+    {
+      "issue_id": "SDK-023",
+      "system": "SDK",
+      "category": "SDK",
+      "status_codes": ["SDK"],
+      "issue_title": "Mobile Number Not updated through SDK",
+      "symptoms": [
+        "Process might be done but not updated in CBS"
+      ],
+      "root_cause": "Might be Mobile Number updated successfully through SDK but not updated in CBS or Might be Failed due to some issue, Need to check the error logs.",
+      "resolution_steps": [
+        "Login Beyond Trust Application",
+        "Connect to server IP :- 192.168.54.112",
+        "Check SDK backend logs",
+        "We can check the logs in AO_LOG_Prod Database, We can ask the agent to share the relevant details like - Agent ID, Agent Mobile Number, and time stamp of the issue.",
+        "For assistance, you can include the CIF ID, mobile number, or any other available details in the request JSON.",
+        "You may use the following reference queries (read-only) for assistance.",
+        "Note -> AO_Logs_Prod:- This table specifically contains SDK logs. It tracks the logs for partner APIs. Any errors or responses from the SDK are captured here.",
+        "Note -> AO_MW_Logs_Prod:- This table stores logs related to middleware. If the issue is related to middleware, we can find the relevant logs in this table.",
+        "Note -> If the mobile number is updated successfully through SDK, it means verification is pending from the DVU team. We can raise the request with the DVU team to verify it. Once the verification is completed by the DVU team, the new mobile number will automatically be updated in CBS."
+      ],
+ 
+      "reference_queries": {
+        "AO_Logs_PROD": "Select * from remotelogs OR Select * from MbActivityLogs",
+        "AO_Logs_PROD.": "Select * from remotelogs where RequestJSON like ‘%835760%’ and startDate between ‘2025-01-09 09:00:00' and ‘2025-01-09 09:05:00’ ",
+        "AO_Logs_PROD..": "Select * from MbActivityLogs where RequestJSON like ‘%835760%’ and startDate between ‘2025-01-09 09:00:00' and ‘2025-01-09 09:05:00’ "
+ 
+      },
+      "escalation": true
+    },
+     {
+      "issue_id": "Tomcat-024",
+      "system": "AML",
+      "category": "Beyond Trust",
+      "status_codes": ["Beyond Trust"],
+      "issue_title": "Tom cat services restart",
+      "symptoms": [
+        "It is a simple process to restart the Apache Tomcat9.0TomcatProdAML  service"
+      ],
+      "root_cause": "The purpose of this document is to provide a clear, step-by-step procedure for restarting the Apache Tomcat9.0TomcatProdAML service (Apache Tomcat9.0TomcatProdAML) on the server with IP address 172.16.96.25. Need to follow below steps and restart the Tomcat service as per need.",
+      "resolution_steps": [
+        "Login Beyond Trust Application",
+        "Connect to the server at IP: 172.16.96.25.",
+        "After logging in, navigate to Services.",
+        "Locate Tomcat Service -->> In the Services list, scroll down to find Tomcat9.0TomcatProdAML.",
+        "Right-click on Tomcat9.0TomcatProdAML and select Stop.",
+        "Once the service has stopped, right-click again and select Start.",
+        "Ensure the Status column shows Running again.",
+        "Close the session when done."
+      ],
+ 
+      "step_assets": {
+ 
+        "2": [
+          "/assets/Tomcat/Tomcat.png"
+        ],
+        "4": [
+          "/assets/Tomcat/Tomcat1.jpeg"
+        ],
+        "6": [
+          "/assets/Tomcat/Tomcat2.jpeg"
+        ]
+      },
+      "escalation": true
+    },
+     {
+      "issue_id": "TAR-024",
+      "system": "CBS",
+      "category": "PAM",
+      "status_codes": ["PAM-Putty"],
+      "issue_title": "TAR Creation Process",
+      "symptoms": [
+        "It is a simple process of TAR Creation, TAR should be completed Everyday as per Pre EOD."
+      ],
+      "root_cause": "TAR Creation is process for Daily Backup Data.",
+      "resolution_steps": [
+        "Login PAM Application(Arcon).",
+        "Login into Arcon with Username- MdAbrar.K and the server will be 10.21.20.21 .",
+        "Follow the commands as per below given screenshot.",
+        "Path for Finadm space % -  cd /opt/shivalik/log then df.",
+        "Note -> The percentage shouldn’t be greater than 90% ",
+        "Path for TAR Sapce - cd /opt/shivalik/log then du -sh.",
+        "(TAR File Name - cdciDailyPreEODfolderCreation_safe_1.sh)",
+        "Path for TAR Ceation - cd /opt/shivalik then l",
+        "You can refer below Screenshot before TAR Creation (Before running TAR)",
+        "When the TAR is completed- it will be displayed as shown in below screenshots."
+      ],
+ 
+      "step_assets": {
+ 
+        "4": [
+          "/assets/TAR/TAR1.png"
+        ],
+        "6": [
+          "/assets/TAR/TAR2.png"
+        ],
+        "9": [
+          "/assets/TAR/TAR3.png"
+        ],
+        "10": [
+          "/assets/TAR/TAR4.png"
+        ]
+      },
+      "escalation": true
     }
     
 ]
